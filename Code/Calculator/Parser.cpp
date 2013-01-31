@@ -317,11 +317,11 @@ int Parser::BinaryOperatorPrecedence( Token* token )
 		return 3;
 	if( 0 == strcmp( token->string, "+" ) || 0 == strcmp( token->string, "-" ) )
 		return 4;
-	if( 0 == strcmp( token->string, "*" ) || 0 == strcmp( token->string, "/" ) )
+	if( 0 == strcmp( token->string, "." ) )		// This is the inner product.
 		return 5;
 	if( 0 == strcmp( token->string, "^" ) )		// This is exponentiation or the outer product.
 		return 6;
-	if( 0 == strcmp( token->string, "." ) )		// This is the inner product.
+	if( 0 == strcmp( token->string, "*" ) || 0 == strcmp( token->string, "/" ) )
 		return 7;
 	if( 0 == strcmp( token->string, ":" ) )
 		return 8;
