@@ -23,15 +23,17 @@ Calculator::Calculator( const char* envString )
 }
 
 //=========================================================================================
-Calculator::Calculator( Environment* environment )
+Calculator::Calculator( Environment* environment, bool ownsEnvironmentMemory /*= true*/ )
 {
+	this->ownsEnvironmentMemory = ownsEnvironmentMemory;
 	this->environment = environment;
 }
 
 //=========================================================================================
 /*virtual*/ Calculator::~Calculator( void )
 {
-	delete environment;
+	if( ownsEnvironmentMemory )
+		delete environment;
 }
 
 //=========================================================================================

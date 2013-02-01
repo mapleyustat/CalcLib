@@ -19,7 +19,7 @@ class CalcLib::Calculator : public CalcLibClass
 public:
 
 	Calculator( const char* envString );
-	Calculator( Environment* environment );
+	Calculator( Environment* environment, bool ownsEnvironmentMemory = true );
 	virtual ~Calculator( void );
 
 	bool IsPartialMathExpression( const char* mathExpression, bool& isPartialMathExpression );
@@ -41,6 +41,7 @@ private:
 	Environment* environment;
 	Tokenizer tokenizer;
 	Parser parser;
+	bool ownsEnvironmentMemory;
 };
 
 // Calculator.h
