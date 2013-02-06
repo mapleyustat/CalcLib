@@ -950,7 +950,7 @@ bool Expression::Evaluate( Expression& result, const VariableEvaluator& variable
 //=========================================================================================
 bool Expression::Term::Evaluate( Term& result, const VariableEvaluator& variableEvaluator ) const
 {
-	result.coeficient = 1.0;
+	result.coeficient = coeficient;
 	result.productOfVariables.RemoveAll( true );
 	for( const Variable* variable = ( const Variable* )productOfVariables.LeftMost(); variable; variable = ( const Variable* )variable->Right() )
 	{
@@ -965,6 +965,7 @@ bool Expression::Term::Evaluate( Term& result, const VariableEvaluator& variable
 			{
 				result.coeficient = 0.0;
 				result.productOfVariables.RemoveAll( true );
+				return true;
 			}
 		}	
 	}

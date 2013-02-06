@@ -622,7 +622,7 @@ bool SumOfBlades::AssignGeometricInverse( const SumOfBlades& sumOfBlades, Invers
 			element.AssignScalar( 1.0 );
 		else
 			element.AssignScalar( 0.0 );
-		constantMatrix.AssignElementTo( rowIndex, 0, element );
+		constantMatrix.AssignElementFrom( rowIndex, 0, element );
 
 		Scalar scalar;
 		if( !blade->AssignScalarPartTo( scalar ) )
@@ -639,10 +639,20 @@ bool SumOfBlades::AssignGeometricInverse( const SumOfBlades& sumOfBlades, Invers
 				return false;
 			if( !element.AssignScalar( coeficient.coeficient ) )
 				return false;
-			if( !coeficientMatrix.AssignElementTo( rowIndex, colIndex, element ) )
+			if( !coeficientMatrix.AssignElementFrom( rowIndex, colIndex, element ) )
 				return false;
 		}
+
+		blade = ( Blade* )blade->Right();
 	}
+
+	/*
+	char printBuffer[1024];
+	coeficientMatrix.Print( printBuffer, sizeof( printBuffer ), ScalarAlgebra::PRINT_FOR_READING );
+	printf( printBuffer );
+	constantMatrix.Print( printBuffer, sizeof( printBuffer ), ScalarAlgebra::PRINT_FOR_READING );
+	printf( printBuffer );
+	*/
 
 	// Okay, now try to solve the system.
 	LinearAlgebra::Matrix::InverseResult inverseResult;
@@ -654,6 +664,13 @@ bool SumOfBlades::AssignGeometricInverse( const SumOfBlades& sumOfBlades, Invers
 		return false;
 	if( !solutionMatrix.AssignProduct( coeficientMatrixInverse, constantMatrix ) )
 		return false;
+
+	/*
+	coeficientMatrixInverse.Print( printBuffer, sizeof( printBuffer ), ScalarAlgebra::PRINT_FOR_READING );
+	printf( printBuffer );
+	solutionMatrix.Print( printBuffer, sizeof( printBuffer ), ScalarAlgebra::PRINT_FOR_READING );
+	printf( printBuffer );
+	*/
 
 	// Create an evaluator class we can use to evaluate the solution.
 	class VariableEvaluator : public ScalarAlgebra::VariableEvaluator
