@@ -374,7 +374,7 @@ bool Matrix::AssignInverse( const Matrix& matrix, InverseType inverseType, Inver
 		if( !AssignScalarFrom( 0, 0, scalar ) )
 			return false;
 	}
-	else
+	else if( matrix.rows == matrix.cols )
 	{
 		if( !AssignAdjugate( matrix ) )
 			return false;
@@ -382,6 +382,10 @@ bool Matrix::AssignInverse( const Matrix& matrix, InverseType inverseType, Inver
 		if( !Scale( scalar ) )
 			return false;
 	}
+	else if( matrix.rows > matrix.cols )
+		return false;		// TODO: Deal with this case.
+	else if( matrix.rows < matrix.cols )
+		return false;		// TODO: Deal with this case.
 
 	return true;
 }

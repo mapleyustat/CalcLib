@@ -50,12 +50,14 @@ public:
 
 		bool Print( char* printBuffer, int printBufferSize, PrintPurpose printPurpose ) const;
 		bool Assign( const Term& term );
+		bool Assign( double coeficient, const char* variableName, int exponent = 1 );
 		bool AssignZero( void );
 		bool AssignDerivative( const Term& term, const char* variableName );
 		bool AssignProduct( const Term& left, const Term& right );
 		bool AssignQuotient( const Term& dividend, const Term& divisor );
 		bool Sort( void ) const;
 		bool IsScalarMultipleOf( const Term& term ) const;
+		bool IsConstant( void ) const;
 		bool Negate( void );
 		const Variable* FindLikeVariable( const Variable* givenVariable ) const;
 		bool Evaluate( Term& result, const VariableEvaluator& variableEvaluator ) const;
@@ -82,6 +84,7 @@ public:
 	bool AssignProduct( const Term& left, const Expression& right );
 	bool AssignProduct( const Utilities::List& productOfExpressions );
 	bool AssignQuotient( const Expression& dividend, const Expression& divisor, Expression& remainder, int divisionLimit = -1 );
+	bool AssignCoeficientTo( Term& coeficient, const Term& coeficientOf ) const;
 	bool Accumulate( const Expression& expression );
 	bool Accumulate( const Term& term );
 	bool Negate( void );

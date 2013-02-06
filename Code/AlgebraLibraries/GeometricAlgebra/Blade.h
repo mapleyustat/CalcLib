@@ -34,6 +34,7 @@ public:
 	bool AssignScalar( const Scalar& scalar );
 	bool AssignScalar( const char* scalar );
 	bool AssignScalarPartTo( Scalar& scalar ) const;
+	bool AssignScalarPartFrom( const Scalar& scalar );
 	bool AssignVector( const Vector& vector, const Scalar& scalar );
 	bool AssignBlade( const Blade& blade, bool sortProduct = true );
 	bool AssignBlade( Utilities::List& outerProduct, const Scalar& scalar, bool sortProduct = true );
@@ -41,6 +42,7 @@ public:
 	bool AssignSquareMagnitudeTo( Scalar& squareMagnitude ) const;
 	bool AssignDerivative( const Blade& blade, const char* variableName );
 	bool AssignAntiDerivative( const Blade& blade, const char* variableName );
+	bool AssignEvaluationTo( Blade& result, const ScalarAlgebra::VariableEvaluator& variableEvaluator ) const;
 
 	bool IsLikeTerm( const Blade& blade, Scalar& relativeHandedness ) const;
 	bool Scale( const Scalar& scalar );

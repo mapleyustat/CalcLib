@@ -558,119 +558,175 @@ bool SumOfBlades::AssignGeometricProduct( const Blade& left, const Blade& right 
 	return true;
 }
 
+#ifdef USE_RATIONAL_EXPRESSIONS_FOR_SCALARS
+
 //=========================================================================================
-// This algorithm computes the geometric square twice.  Is there a way that does it just once?
+// I'm not sure how to solve this problem in the most general case without
+// resorting to linear algebra.
 bool SumOfBlades::AssignGeometricInverse( const SumOfBlades& sumOfBlades, InverseType inverseType, InverseResult& inverseResult )
 {
 	// The given multivector is non-singular until proven otherwise.
 	inverseResult = NONSINGULAR_MULTIVECTOR;
 
-	// Build a mapping from basis blades to matrix indices.
-	int rowCount = 0, colCount = sumOfBlades.sum.Count();
-	Utilities::Map< int > indexMap;
-	char bladeString[ PRINT_BUFFER_SIZE_SMALL ];
-	SumOfBlades geometricProduct;
-	for( const Blade* leftBlade = ( const Blade* )sumOfBlades.sum.LeftMost(); leftBlade; leftBlade = ( const Blade* )leftBlade->Right() )
+	// Go generate the form of the inverse.
+	int variableCount = 0;
+	SumOfBlades symbolicInverse( sumOfBlades );
+	for( Blade* blade = ( Blade* )symbolicInverse.sum.LeftMost(); blade; blade = ( Blade* )blade->Right() )
 	{
-		for( const Blade* rightBlade = ( const Blade* )sumOfBlades.sum.LeftMost(); rightBlade; rightBlade = ( const Blade* )rightBlade->Right() )
-		{
-			if( !geometricProduct.AssignGeometricProduct( *leftBlade, *rightBlade ) )
-				return false;
+		Scalar scalar;
+		if( !blade->AssignScalarPartTo( scalar ) )
+			return false;
 
-			for( Blade* blade = ( Blade* )geometricProduct.sum.LeftMost(); blade; blade = ( Blade* )blade->Right() )
-			{
-				if( !blade->Print( bladeString, sizeof( bladeString ), ScalarAlgebra::PRINT_FOR_SORTING ) )
-					return false;
-				if( !indexMap.Lookup( bladeString ) )
-					if( !indexMap.Insert( bladeString, rowCount++ ) )
-						return false;
-			}
+		char variableName[32];
+		sprintf_s( variableName, sizeof( variableName ), "__%d", variableCount++ );
+		Scalar symbol;
+		symbol = variableName;
+		
+		scalar = scalar * symbol;
+		if( !blade->AssignScalarPartFrom( scalar ) )
+			return false;
+	}
+
+	// Bail if somehow there are no variables in the system.
+	if( variableCount <= 0 )
+		return false;
+
+	// Calculate the symbolic product of the multivector and its symbolic inverse.
+	SumOfBlades symbolicProduct;
+	if( inverseType == LEFT_INVERSE )
+	{
+		if( !symbolicProduct.AssignGeometricProduct( symbolicInverse, sumOfBlades ) )
+			return false;
+	}
+	else if( inverseType == RIGHT_INVERSE )
+	{
+		if( !symbolicProduct.AssignGeometricProduct( sumOfBlades, symbolicInverse ) )
+			return false;
+	}
+	else
+		return false;
+
+	// Build from the product a system of linear equations.  If the system is
+	// over-determined, it's okay, because we always check the result before
+	// returning it as a valid inverse.  The difficulty arrising in such a
+	// system is that of choosing an appropriate sub-system to solve.  It could
+	// be that not all sub-systems have a unique solution, yet the entire system
+	// has a unique solution.  We are only going to choose one sub-system to solve.
+	LinearAlgebra::Matrix coeficientMatrix( variableCount, variableCount );
+	LinearAlgebra::Matrix constantMatrix( variableCount, 1 );
+	Blade* blade = ( Blade* )symbolicProduct.sum.LeftMost();
+	for( int rowIndex = 0; rowIndex < variableCount; rowIndex++ )
+	{
+		LinearAlgebra::Element element;
+		if( blade->Grade() == 0 )
+			element.AssignScalar( 1.0 );
+		else
+			element.AssignScalar( 0.0 );
+		constantMatrix.AssignElementTo( rowIndex, 0, element );
+
+		Scalar scalar;
+		if( !blade->AssignScalarPartTo( scalar ) )
+			return false;
+		for( int colIndex = 0; colIndex < variableCount; colIndex++ )
+		{
+			char variableName[32];
+			sprintf_s( variableName, sizeof( variableName ), "__%d", colIndex );
+			ScalarAlgebra::Expression::Term coeficient, coeficientOf;
+			coeficientOf.Assign( 1.0, variableName );
+			if( !scalar.scalar.Numerator().AssignCoeficientTo( coeficient, coeficientOf ) )
+				return false;
+			if( !coeficient.IsConstant() )
+				return false;
+			if( !element.AssignScalar( coeficient.coeficient ) )
+				return false;
+			if( !coeficientMatrix.AssignElementTo( rowIndex, colIndex, element ) )
+				return false;
 		}
 	}
 
-	// If we have an undertermined system, then there isn't enough information to solve it.
-	// Sometimes the system will be overdetermined, but it should be consistent.
-	if( rowCount < colCount )
+	// Okay, now try to solve the system.
+	LinearAlgebra::Matrix::InverseResult inverseResult;
+	LinearAlgebra::Matrix coeficientMatrixInverse;
+	LinearAlgebra::Matrix solutionMatrix( variableCount, 1 );
+	if( !coeficientMatrixInverse.AssignInverse( coeficientMatrix, LinearAlgebra::Matrix::LEFT_INVERSE, inverseResult ) )
+		return false;
+	if( inverseResult == LinearAlgebra::Matrix::SINGULAR_MATRIX )
+		return false;
+	if( !solutionMatrix.AssignProduct( coeficientMatrixInverse, constantMatrix ) )
 		return false;
 
-	// Declare matrices we'll use to solve a linear system.  These initialize to zero throughout.
-	LinearAlgebra::Matrix coeficientMatrix( rowCount, colCount );
-	LinearAlgebra::Matrix constantMatrix( rowCount, 1 );
-
-	// Now go populate the coeficient and constant matrices.
-	LinearAlgebra::Scalar scalar;
-	int row = 0, col = 0;
-	int index = 0;
-	for( const Blade* leftBlade = ( const Blade* )sumOfBlades.sum.LeftMost(); leftBlade; leftBlade = ( const Blade* )leftBlade->Right() )
+	// Create an evaluator class we can use to evaluate the solution.
+	class VariableEvaluator : public ScalarAlgebra::VariableEvaluator
 	{
-		if( inverseType == RIGHT_INVERSE )
-			col = 0;
-
-		for( const Blade* rightBlade = ( const Blade* )sumOfBlades.sum.LeftMost(); rightBlade; rightBlade = ( const Blade* )rightBlade->Right() )
+	public:
+		VariableEvaluator( LinearAlgebra::Matrix* solutionMatrix )
 		{
-			if( !geometricProduct.AssignGeometricProduct( *leftBlade, *rightBlade ) )
-				return false;
-
-			for( Blade* blade = ( Blade* )geometricProduct.sum.LeftMost(); blade; blade = ( Blade* )blade->Right() )
-			{
-				if( !blade->Print( bladeString, sizeof( bladeString ), ScalarAlgebra::PRINT_FOR_SORTING ) )
-					return false;
-				if( !indexMap.Lookup( bladeString, &index ) )
-					return false;
-				row = index;
-
-				if( !coeficientMatrix.AccumulateScalarAt( row, col, blade->scalar ) )
-					return false;
-				
-				// This may do some redundant setting, but that's okay.
-				if( blade->Grade() > 0 )
-					scalar = 0.0;
-				else
-					scalar = 1.0;
-				if( !constantMatrix.AssignScalarFrom( row, 0, scalar ) )
-					return false;
-			}
-
-			if( inverseType == RIGHT_INVERSE )
-				col++;
+			this->solutionMatrix = solutionMatrix;
 		}
 
-		if( inverseType == LEFT_INVERSE )
-			col++;
-	}
+		virtual bool Evaluate( const char* variableName, double& variableValue ) const override
+		{
+			char variableNameCopy[32];
+			strcpy_s( variableNameCopy, sizeof( variableNameCopy ), variableName );
+			char* variableNumberStr = &variableNameCopy[2];
+			int variableIndex = atoi( variableNumberStr );
 
-	// We don't need this anymore.
-	indexMap.RemoveAll();
+			LinearAlgebra::Element element;
+			ScalarAlgebra::Scalar scalar;
+			if( !solutionMatrix->AssignElementTo( variableIndex, 0, element ) )
+				return false;
+			if( !element.AssignScalarTo( scalar ) )
+				return false;
+			variableValue = scalar;
+			return true;
+		}
 
-	// Try to solve the linear system.
-	LinearAlgebra::Matrix::InverseResult matrixInverseResult;
-	LinearAlgebra::Matrix inverseCoeficientMatrix;
-	if( !inverseCoeficientMatrix.AssignInverse( coeficientMatrix, LinearAlgebra::Matrix::LEFT_INVERSE, matrixInverseResult ) )
+		LinearAlgebra::Matrix* solutionMatrix;
+	};
+
+	// Did we find the solution?
+	double epsilon = 1e-4;
+	double productScalar;
+	VariableEvaluator variableEvaluator( &solutionMatrix );
+	SumOfBlades literalProduct;
+	if( !symbolicProduct.AssignEvaluationTo( literalProduct, variableEvaluator ) )
+		return false;
+	if( !literalProduct.AssignScalarTo( productScalar ) || fabs( productScalar - 1.0 ) > epsilon )
+		return false;
+
+	// Yes!  We found it!  Return the solution.
+	if( !symbolicInverse.AssignEvaluationTo( *this, variableEvaluator ) )
+		return false;
+
+	// Kuplah, Worf!
+	return true;
+}
+
+#else //USE_RATIONAL_EXPRESSIONS_FOR_SCALARS
+
+//=========================================================================================
+bool SumOfBlades::AssignGeometricInverse( const SumOfBlades& sumOfBlades, InverseType inverseType, InverseResult& inverseResult )
+{
+	// The only way that I currently know how to take a multivector
+	// inverse requires the use of the symbolic manipulation support.
+	return false;
+}
+
+#endif //USE_RATIONAL_EXPRESSIONS_FOR_SCALARS
+
+//=========================================================================================
+bool SumOfBlades::AssignEvaluationTo( SumOfBlades& result, const ScalarAlgebra::VariableEvaluator& variableEvaluator ) const
+{
+	if( !result.AssignZero() )
+		return false;
+
+	for( const Blade* blade = ( const Blade* )sum.LeftMost(); blade; blade = ( const Blade* )blade->Right() )
 	{
-		if( matrixInverseResult == LinearAlgebra::Matrix::SINGULAR_MATRIX )
-			inverseResult = SINGULAR_MULTIVECTOR;
-		return false;
-	}
+		Blade evaluatedBlade;
+		if( !blade->AssignEvaluationTo( evaluatedBlade, variableEvaluator ) )
+			return false;
 
-	// Calculate the solutions to the system.
-	LinearAlgebra::Matrix solutionMatrix;
-	if( !solutionMatrix.AssignProduct( inverseCoeficientMatrix, constantMatrix ) )
-		return false;
-
-	// Finally, apply the solution to calculate the inverse.
-	if( !AssignZero() )
-		return false;
-	row = 0;
-	for( const Blade* blade = ( const Blade* )sumOfBlades.sum.LeftMost(); blade; blade = ( const Blade* )blade->Right() )
-	{
-		if( !solutionMatrix.AssignScalarTo( row++, 0, scalar ) )
-			return false;
-		Blade accumulationBlade;
-		if( !accumulationBlade.AssignBlade( *blade ) )
-			return false;
-		if( !accumulationBlade.Scale( scalar ) )
-			return false;
-		if( !Accumulate( accumulationBlade ) )
+		if( !result.Accumulate( evaluatedBlade ) )
 			return false;
 	}
 

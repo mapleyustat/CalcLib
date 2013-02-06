@@ -113,8 +113,7 @@ typename ScalarAlgebra::TemplatedScalar< double >& ScalarAlgebra::TemplatedScala
 template<>
 typename ScalarAlgebra::TemplatedScalar< double >& ScalarAlgebra::TemplatedScalar< double >::operator=( const char* scalar )
 {
-	// We can't support this in general.  See the specialized version of this method.
-	this->scalar = 0.0;
+	this->scalar = atof( scalar );
 	return *this;
 }
 
@@ -206,22 +205,6 @@ bool ScalarAlgebra::TemplatedScalar< double >::Negate( void )
 {
 	scalar = -scalar;
 	return true;
-}
-
-//=========================================================================================
-template<>
-bool ScalarAlgebra::TemplatedScalar< double >::Differentiate( const char* variableName )
-{
-	scalar = 0.0;
-	return true;
-}
-
-//=========================================================================================
-template<>
-bool ScalarAlgebra::TemplatedScalar< double >::AntiDifferentiate( const char* variableName )
-{
-	scalar = 0.0;
-	return false;
 }
 
 //=========================================================================================
@@ -449,6 +432,8 @@ bool ScalarAlgebra::TemplatedScalar< ScalarAlgebra::RationalExpression >::Negate
 	return true;
 }
 
+#ifdef USE_RATIONAL_EXPRESSIONS_FOR_SCALARS
+
 //=========================================================================================
 template<>
 bool ScalarAlgebra::TemplatedScalar< ScalarAlgebra::RationalExpression >::Differentiate( const char* variableName )
@@ -466,6 +451,22 @@ bool ScalarAlgebra::TemplatedScalar< ScalarAlgebra::RationalExpression >::AntiDi
 		return false;
 	return true;
 }
+
+//=========================================================================================
+bool ScalarAlgebra::TemplatedScalar< ScalarAlgebra::RationalExpression >::Evaluate( const VariableEvaluator& variableEvaluator )
+{
+	ScalarAlgebra::RationalExpression result;
+
+	if( !scalar.Evaluate( result, variableEvaluator ) )
+		return false;
+
+	if( !scalar.Assign( result ) )
+		return false;
+
+	return true;
+}
+
+#endif //USE_RATIONAL_EXPRESSIONS_FOR_SCALARS
 
 //=========================================================================================
 template<>

@@ -59,7 +59,8 @@ public:
 	bool AssignSquareMagnitudeTo( Scalar& squareMagnitude ) const;
 	bool AssignDerivative( const SumOfBlades& sumOfBlades, const char* variableName );
 	bool AssignAntiDerivative( const SumOfBlades& sumOfBlades, const char* variableName );
-	
+	bool AssignEvaluationTo( SumOfBlades& result, const ScalarAlgebra::VariableEvaluator& variableEvaluator ) const;
+
 	bool Scale( const Scalar& scalar );
 	bool Reverse( void );
 	bool Bar( void );

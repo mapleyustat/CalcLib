@@ -124,6 +124,13 @@ bool Blade::AssignScalarPartTo( Scalar& scalar ) const
 }
 
 //=========================================================================================
+bool Blade::AssignScalarPartFrom( const Scalar& scalar )
+{
+	this->scalar = scalar;
+	return true;
+}
+
+//=========================================================================================
 bool Blade::AssignVector( const Vector& vector, const Scalar& scalar )
 {
 	product.RemoveAll( true );
@@ -223,6 +230,18 @@ bool Blade::AssignAntiDerivative( const Blade& blade, const char* variableName )
 		return false;
 
 	if( !scalar.AntiDifferentiate( variableName ) )
+		return false;
+
+	return true;
+}
+
+//=========================================================================================
+bool Blade::AssignEvaluationTo( Blade& result, const ScalarAlgebra::VariableEvaluator& variableEvaluator ) const
+{
+	if( !result.AssignBlade( *this ) )
+		return false;
+
+	if( !result.scalar.Evaluate( variableEvaluator ) )
 		return false;
 
 	return true;

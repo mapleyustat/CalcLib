@@ -52,8 +52,13 @@ public:
 	bool Invert( void );
 	bool Negate( void );
 
+#ifdef USE_RATIONAL_EXPRESSIONS_FOR_SCALARS
+
 	bool Differentiate( const char* variableName );
 	bool AntiDifferentiate( const char* variableName );
+	bool Evaluate( const VariableEvaluator& variableEvaluator );
+
+#endif //USE_RATIONAL_EXPRESSIONS_FOR_SCALARS
 
 	bool Print( char* printBuffer, int printBufferSize, PrintPurpose printPurpose, bool* parenthesisNeeded = 0 ) const;
 

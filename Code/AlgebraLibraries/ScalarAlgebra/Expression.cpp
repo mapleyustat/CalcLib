@@ -468,6 +468,16 @@ bool Expression::Term::Assign( const Term& term )
 }
 
 //=========================================================================================
+bool Expression::Term::Assign( double coeficient, const char* variableName, int exponent /*= 1*/ )
+{
+	this->coeficient = coeficient;
+	productOfVariables.RemoveAll( true );
+	Variable* variable = new Variable( variableName, exponent );
+	productOfVariables.InsertRightOf( productOfVariables.RightMost(), variable );
+	return true;
+}
+
+//=========================================================================================
 bool Expression::Term::AssignDerivative( const Term& term, const char* variableName )
 {
 	if( !Assign( term ) )
@@ -740,6 +750,19 @@ bool Expression::Term::AssignQuotient( const Term& dividend, const Term& divisor
 }
 
 //=========================================================================================
+bool Expression::AssignCoeficientTo( Term& coeficient, const Term& coeficientOf ) const
+{
+	Term* likeTerm = const_cast< Expression* >( this )->FindLikeTerm( coeficientOf );
+	if( !likeTerm )
+		return false;
+
+	if( !coeficient.AssignQuotient( *likeTerm, coeficientOf ) )
+		return false;
+
+	return true;
+}
+
+//=========================================================================================
 bool Expression::Accumulate( const Expression& expression )
 {
 	for( const Term* term = ( const Term* )expression.sumOfTerms.LeftMost(); term; term = ( const Term* )term->Right() )
@@ -826,6 +849,14 @@ bool Expression::Term::IsScalarMultipleOf( const Term& givenTerm ) const
 	}
 
 	return true;
+}
+
+//=========================================================================================
+bool Expression::Term::IsConstant( void ) const
+{
+	if( productOfVariables.Count() == 0 )
+		return true;
+	return false;
 }
 
 //=========================================================================================
