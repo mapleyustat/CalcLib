@@ -91,7 +91,7 @@ GradePartFunctionEvaluator::GradePartFunctionEvaluator( void )
 
 		// Finally, do the work.
 		GeometricAlgebra::SumOfBlades homogeneousPart;
-		if( !multivector.GradePart( grade, homogeneousPart ) )
+		if( !multivector.GetGradePart( grade, homogeneousPart ) )
 		{
 			environment.AddError( "Failed to get the grade %d part out of the given multivectors.", grade );
 			break;

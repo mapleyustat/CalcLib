@@ -845,8 +845,30 @@ bool SumOfBlades::Accumulate( const SumOfBlades& sumOfBlades )
 }
 
 //=========================================================================================
+// For zero blades to find their way into the multi-vector is actually a bug.
+// I believe that some algorithms depend on the fact that all zero multi-vectors
+// have no terms in them.  For example, we would identify the zero multivector
+// as a sum of zero blades.  This routine, therefore, is a bit of hack and a
+// safety measure.
+bool SumOfBlades::CullZeroBlades( void )
+{
+	Blade* nextBlade;
+	for( Blade* blade = ( Blade* )sum.LeftMost(); blade; blade = ( Blade* )nextBlade )
+	{
+		nextBlade = ( Blade* )blade->Right();
+		if( blade->scalar.scalar.IsZero() )
+			sum.Remove( blade, true );
+	}
+	return true;
+}
+
+//=========================================================================================
+// Notice that we consider zero to be any grade.
 bool SumOfBlades::IsHomogeneousOfGrade( int grade ) const
 {
+	const_cast< SumOfBlades* >( this )->CullZeroBlades();
+	if( sum.Count() == 0 )
+		return true;
 	for( const Blade* blade = ( const Blade* )sum.LeftMost(); blade; blade = ( const Blade* )blade->Right() )
 		if( blade->Grade() != grade )
 			return false;
@@ -907,7 +929,7 @@ bool SumOfBlades::ScalarPart( const Blade& blade, Scalar& scalar ) const
 }
 
 //=========================================================================================
-bool SumOfBlades::GradePart( int grade, SumOfBlades& homogeneousPart ) const
+bool SumOfBlades::GetGradePart( int grade, SumOfBlades& homogeneousPart ) const
 {
 	if( !homogeneousPart.AssignZero() )
 		return false;
@@ -916,6 +938,21 @@ bool SumOfBlades::GradePart( int grade, SumOfBlades& homogeneousPart ) const
 		if( blade->Grade() == grade )
 			if( !homogeneousPart.Accumulate( *blade ) )
 				return false;
+
+	return true;
+}
+
+//=========================================================================================
+bool SumOfBlades::SetGradePart( int grade, const SumOfBlades& homogeneousPart )
+{
+	if( !homogeneousPart.IsHomogeneousOfGrade( grade ) )
+		return false;
+
+	if( !RemoveGrade( grade ) )
+		return false;
+
+	if( !Accumulate( homogeneousPart ) )
+		return false;
 
 	return true;
 }

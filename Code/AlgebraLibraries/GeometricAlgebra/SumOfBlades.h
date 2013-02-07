@@ -77,7 +77,11 @@ public:
 	bool AssignBladeTo( Blade& blade, int index ) const;
 
 	bool ScalarPart( const Blade& blade, Scalar& scalar ) const;
-	bool GradePart( int grade, SumOfBlades& homogeneousPart ) const;
+	bool GetGradePart( int grade, SumOfBlades& homogeneousPart ) const;
+	bool SetGradePart( int grade, const SumOfBlades& homogeneousPart );
+
+	// We can't declare this as a const method, but it really doesn't change the value of the multi-vector.
+	bool CullZeroBlades( void );
 
 private:
 
