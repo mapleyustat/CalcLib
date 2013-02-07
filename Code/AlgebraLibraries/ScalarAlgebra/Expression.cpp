@@ -750,11 +750,17 @@ bool Expression::Term::AssignQuotient( const Term& dividend, const Term& divisor
 }
 
 //=========================================================================================
+// Given an expression 3x^2, if we request the coeficient of x, we don't get 3x,
+// which might be a desired behavior.  For now, the desired coeficient must always
+// result in a term with no variable product.
 bool Expression::AssignCoeficientTo( Term& coeficient, const Term& coeficientOf ) const
 {
+	if( !coeficient.AssignZero() )
+		return false;
+
 	Term* likeTerm = const_cast< Expression* >( this )->FindLikeTerm( coeficientOf );
 	if( !likeTerm )
-		return false;
+		return true;		// Return zero in the event that the term is not found.
 
 	if( !coeficient.AssignQuotient( *likeTerm, coeficientOf ) )
 		return false;

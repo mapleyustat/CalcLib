@@ -565,6 +565,10 @@ bool SumOfBlades::AssignGeometricProduct( const Blade& left, const Blade& right 
 // resorting to linear algebra.
 bool SumOfBlades::AssignGeometricInverse( const SumOfBlades& sumOfBlades, InverseType inverseType, InverseResult& inverseResult )
 {
+	// Return zero in the event that the given multivector has no inverse.
+	if( !AssignZero() )
+		return false;
+
 	// The given multivector is non-singular until proven otherwise.
 	inverseResult = NONSINGULAR_MULTIVECTOR;
 
@@ -655,13 +659,17 @@ bool SumOfBlades::AssignGeometricInverse( const SumOfBlades& sumOfBlades, Invers
 	*/
 
 	// Okay, now try to solve the system.
-	LinearAlgebra::Matrix::InverseResult inverseResult;
+	LinearAlgebra::Matrix::InverseResult matrixInverseResult;
 	LinearAlgebra::Matrix coeficientMatrixInverse;
 	LinearAlgebra::Matrix solutionMatrix( variableCount, 1 );
-	if( !coeficientMatrixInverse.AssignInverse( coeficientMatrix, LinearAlgebra::Matrix::LEFT_INVERSE, inverseResult ) )
+	if( !coeficientMatrixInverse.AssignInverse( coeficientMatrix, LinearAlgebra::Matrix::LEFT_INVERSE, matrixInverseResult ) )
 		return false;
-	if( inverseResult == LinearAlgebra::Matrix::SINGULAR_MATRIX )
-		return false;
+	if( matrixInverseResult == LinearAlgebra::Matrix::SINGULAR_MATRIX )
+	{
+		// Here we succeed in determining that the multivector has no inverse.
+		inverseResult = SINGULAR_MULTIVECTOR;
+		return true;
+	}
 	if( !solutionMatrix.AssignProduct( coeficientMatrixInverse, constantMatrix ) )
 		return false;
 
@@ -709,7 +717,14 @@ bool SumOfBlades::AssignGeometricInverse( const SumOfBlades& sumOfBlades, Invers
 	if( !symbolicProduct.AssignEvaluationTo( literalProduct, variableEvaluator ) )
 		return false;
 	if( !literalProduct.AssignScalarTo( productScalar ) || fabs( productScalar - 1.0 ) > epsilon )
-		return false;
+	{
+		// Even if a sub-system of the system has a unique solution, we may find out
+		// that its solution is not the solution, if any, to the entire system.
+		// Any solution of the entire system must also be the solution to any
+		// sub-system.  So here we can conclude that the multivector is singular.
+		inverseResult = SINGULAR_MULTIVECTOR;
+		return true;
+	}
 
 	// Yes!  We found it!  Return the solution.
 	if( !symbolicInverse.AssignEvaluationTo( *this, variableEvaluator ) )

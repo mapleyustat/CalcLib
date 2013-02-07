@@ -360,7 +360,7 @@ bool Matrix::AssignInverse( const Matrix& matrix, InverseType inverseType, Inver
 	if( scalar == 0.0 )
 	{
 		inverseResult = SINGULAR_MATRIX;
-		return false;
+		return true;
 	}
 
 	if( !scalar.Invert() )
