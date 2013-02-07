@@ -24,6 +24,7 @@ namespace ScalarAlgebra
 		PRINT_FOR_SORTING,
 		PRINT_FOR_READING,
 		PRINT_FOR_LATEX,
+		//PRINT_FOR_PARSING,
 	};
 
 	class VariableEvaluator;
@@ -39,7 +40,6 @@ namespace ScalarAlgebra
 }
 
 #include "../../Utilities/Utilities.h"
-
 #include "Expression.h"
 #include "RationalExpression.h"
 #include "Scalar.h"
