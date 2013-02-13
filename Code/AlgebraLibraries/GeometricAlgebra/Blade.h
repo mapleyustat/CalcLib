@@ -43,6 +43,7 @@ public:
 	bool AssignDerivative( const Blade& blade, const char* variableName );
 	bool AssignAntiDerivative( const Blade& blade, const char* variableName );
 	bool AssignEvaluationTo( Blade& result, const ScalarAlgebra::VariableEvaluator& variableEvaluator ) const;
+	bool AssignFactorizationOf( const SumOfBlades& sumOfBlades, const Utilities::List& probingVectorList );
 
 	bool IsLikeTerm( const Blade& blade, Scalar& relativeHandedness ) const;
 	bool Scale( const Scalar& scalar );

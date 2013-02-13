@@ -248,6 +248,15 @@ bool Blade::AssignEvaluationTo( Blade& result, const ScalarAlgebra::VariableEval
 }
 
 //=========================================================================================
+// The factorization algorithm performed here initially will be the naive approach.
+// Later, I should consider the paper: http://www.geometricalgebra.net/downloads/fontijne_agacse2008_fact_join_blades.pdf.
+bool Blade::AssignFactorizationOf( const SumOfBlades& sumOfBlades, const Utilities::List& probingVectorList )
+{
+	//...
+	return false;
+}
+
+//=========================================================================================
 bool Blade::IsLikeTerm( const Blade& blade, Scalar& relativeHandedness ) const
 {
 	if( Grade() != blade.Grade() )
