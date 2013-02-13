@@ -64,6 +64,14 @@ public:
 	bool Scale( const Scalar& scalar );
 	bool Reverse( void );
 	bool Bar( void );
+	
+	enum FactorResult
+	{
+		FACTORED,
+		NOT_A_BLADE,
+	};
+
+	bool Factor( const Utilities::List& probingVectorList, FactorResult& factorResult, Utilities::List& factorizationList ) const;
 
 	bool Accumulate( const Blade& blade );
 	bool Accumulate( const SumOfBlades& sumOfBlades );

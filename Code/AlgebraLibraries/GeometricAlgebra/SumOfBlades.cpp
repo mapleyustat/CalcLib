@@ -817,6 +817,12 @@ bool SumOfBlades::Bar( void )
 }
 
 //=========================================================================================
+bool SumOfBlades::Factor( const Utilities::List& probingVectorList, FactorResult& factorResult, Utilities::List& factorizationList ) const
+{
+	return false;
+}
+
+//=========================================================================================
 bool SumOfBlades::Accumulate( const Blade& blade )
 {
 	if( blade.scalar == 0.0 )
