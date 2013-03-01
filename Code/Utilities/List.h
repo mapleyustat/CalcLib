@@ -50,7 +50,7 @@ public:
 	// significant limitation of the list class that I can think of.
 	class Item
 	{
-		friend List;
+		friend class List;
 		friend class MultiList;
 
 	public:
