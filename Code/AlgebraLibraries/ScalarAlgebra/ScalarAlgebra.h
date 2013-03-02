@@ -12,7 +12,7 @@
 #pragma once
 
 #include <math.h>
-#include "../../CppLangFeatures.h"
+#include "../../Override.h"
 
 //=========================================================================================
 #define USE_RATIONAL_EXPRESSIONS_FOR_SCALARS
