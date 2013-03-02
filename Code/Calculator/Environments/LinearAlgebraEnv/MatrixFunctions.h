@@ -31,8 +31,8 @@ public:
 
 	MatrixFunctionEvaluator( Function function );
 	virtual ~MatrixFunctionEvaluator( void );
-	virtual bool EvaluateResult( Number& result, Environment& environment ) override;
-	virtual Number* CreateNumberForResult( Environment& environment ) override;
+	virtual bool EvaluateResult( Number& result, Environment& environment ) OVERRIDE;
+	virtual Number* CreateNumberForResult( Environment& environment ) OVERRIDE;
 
 private:
 

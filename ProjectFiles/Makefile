@@ -1,12 +1,10 @@
-#
 # Makefile for CalcLib
-#
 
 CODE = ../Code
 BUILD = ../Build
 
 CPP = gcc
-CPPFLAGS = -I $(CODE)/
+FLAGS = -I $(CODE)/ -D__LINUX__
 
 LIB = $(BUILD)/CalcLib.a
 
@@ -15,29 +13,39 @@ SRCS = \
 	$(wildcard $(CODE)/AlgebraLibraries/**/*.cpp) \
 	$(wildcard $(CODE)/Calculator/Environments/**/*.cpp)
 
-BARE_SRCS = $(notdir $(SRCS))
-BARE_OBJS = $(BARE_SRCS:.cpp=.o)
-OBJS = $(addprefix $(BUILD)/, $(BARE_OBJS))
-
-include Makefile.dep
+OBJS = $(patsubst %.cpp, $(BUILD)/%.o, $(notdir $(SRCS)))
 
 all: $(LIB)
 
-$(LIB): build_dir $(OBJS)
+$(LIB): $(OBJS)
 	ar -cru $(LIB) $(OBJS)
-	
-# This won't work...
-#%.o: %.cpp
-#	$(CPP) $(CPPFLAGS) -c $< -o $@
 
-# Can I upgrade C++ so that i can use the 'override' keyword?
+define BUILD_OBJ_RULE =
+$(1): $(2)
+	$$(CPP) $$(FLAGS) -c $$< -o $$@
+endef
 
+$(foreach src, $(SRCS), $(eval $(call BUILD_OBJ_RULE, $(patsubst %.cpp, $(BUILD)/%.o, $(notdir $(src))), $(src))))
 
+again:
+	make clean
+	make
+
+clean:
+	rm -f $(OBJS)
+	rm -f $(LIB)
+
+# In Linux, folders are files, so shouldn't I be able to fold this into the dep-graph?
+.PHONY: build_dir
 build_dir:
 	cd ..; mkdir -p Build
-	
-dep:
-	makedepend $(CPPFLAGS) $(SRCS) -f Makefile.dep
 
+# I can't really make use of this, because the makedepend doesn't know where I want the object files.
+# So, if a header is touched, we have to rebuild all.  :(
+#dep:
+#	@makedepend $(FLAGS) $(SRCS) -p $(BUILD) -f Makefile.dep
+#	rm -f Makefile.dep.bak
+#
+#include Makefile.dep
 
-
+# Makefile for CalcLib

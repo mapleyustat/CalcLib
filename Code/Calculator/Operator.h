@@ -26,7 +26,7 @@ public:
 	UnaryStringExecutionEvaluator( void );
 	virtual ~UnaryStringExecutionEvaluator( void );
 
-	virtual bool EvaluateResult( Number& result, Environment& environment ) override;
+	virtual bool EvaluateResult( Number& result, Environment& environment ) OVERRIDE;
 };
 
 //=========================================================================================
@@ -46,7 +46,7 @@ public:
 	UnaryArithmeticOperationEvaluator( ArithmeticOperation arithmeticOperation );
 	virtual ~UnaryArithmeticOperationEvaluator( void );
 	
-	virtual bool EvaluateResult( Number& result, Environment& environment ) override;
+	virtual bool EvaluateResult( Number& result, Environment& environment ) OVERRIDE;
 
 protected:
 
@@ -78,7 +78,7 @@ public:
 	BinaryArithmeticOperationEvaluator( ArithmeticOperation arithmeticOperation );
 	virtual ~BinaryArithmeticOperationEvaluator( void );
 	
-	virtual bool EvaluateResult( Number& result, Environment& environment ) override;
+	virtual bool EvaluateResult( Number& result, Environment& environment ) OVERRIDE;
 
 protected:
 
@@ -107,7 +107,7 @@ public:
 	BinaryComparisonOperationEvaluator( ComparisonOperation comparisonOperation );
 	virtual ~BinaryComparisonOperationEvaluator( void );
 	
-	virtual bool EvaluateResult( Number& result, Environment& environment ) override;
+	virtual bool EvaluateResult( Number& result, Environment& environment ) OVERRIDE;
 
 private:
 	ComparisonOperation comparisonOperation;
@@ -131,7 +131,7 @@ public:
 	BinaryLogicOperationEvaluator( LogicOperation logicOperation );
 	virtual ~BinaryLogicOperationEvaluator( void );
 	
-	virtual bool EvaluateResult( Number& result, Environment& environment ) override;
+	virtual bool EvaluateResult( Number& result, Environment& environment ) OVERRIDE;
 
 private:
 	LogicOperation logicOperation;
@@ -147,7 +147,7 @@ public:
 	BinaryAssignmentOperationEvaluator( void );
 	virtual ~BinaryAssignmentOperationEvaluator( void );
 	
-	virtual bool EvaluateResult( Number& result, Environment& environment ) override;
+	virtual bool EvaluateResult( Number& result, Environment& environment ) OVERRIDE;
 };
 
 //=========================================================================================
@@ -160,8 +160,8 @@ public:
 	BinaryIndexingOperationEvaluator( void );
 	virtual ~BinaryIndexingOperationEvaluator( void );
 	
-	virtual bool EvaluateResult( Number& result, Environment& environment ) override;
-	virtual bool StoreResult( const Number& result, Environment& environment ) override;
+	virtual bool EvaluateResult( Number& result, Environment& environment ) OVERRIDE;
+	virtual bool StoreResult( const Number& result, Environment& environment ) OVERRIDE;
 
 private:
 

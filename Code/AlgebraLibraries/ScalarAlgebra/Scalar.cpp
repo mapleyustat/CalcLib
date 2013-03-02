@@ -10,6 +10,10 @@
  */
 
 #include "ScalarAlgebra.h"
+#include <stdlib.h>
+
+// Provide this so that GCC doesn't complain.
+namespace ScalarAlgebra {
 
 //=========================================================================================
 template<>
@@ -453,6 +457,7 @@ bool ScalarAlgebra::TemplatedScalar< ScalarAlgebra::RationalExpression >::AntiDi
 }
 
 //=========================================================================================
+template<>
 bool ScalarAlgebra::TemplatedScalar< ScalarAlgebra::RationalExpression >::Evaluate( const VariableEvaluator& variableEvaluator )
 {
 	ScalarAlgebra::RationalExpression result;
@@ -473,6 +478,8 @@ template<>
 bool ScalarAlgebra::TemplatedScalar< ScalarAlgebra::RationalExpression >::Print( char* printBuffer, int printBufferSize, PrintPurpose printPurpose, bool* parenthesisNeeded /*= 0*/ ) const
 {
 	return scalar.Print( printBuffer, printBufferSize, printPurpose, parenthesisNeeded );
+}
+
 }
 
 // Scalar.cpp

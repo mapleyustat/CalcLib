@@ -689,7 +689,7 @@ bool SumOfBlades::AssignGeometricInverse( const SumOfBlades& sumOfBlades, Invers
 			this->solutionMatrix = solutionMatrix;
 		}
 
-		virtual bool Evaluate( const char* variableName, double& variableValue ) const override
+		virtual bool Evaluate( const char* variableName, double& variableValue ) const OVERRIDE
 		{
 			char variableNameCopy[32];
 			strcpy_s( variableNameCopy, sizeof( variableNameCopy ), variableName );

@@ -18,8 +18,8 @@ class CalcLib::ConstantEvaluator : public Evaluator
 public:
 	ConstantEvaluator( Number* constant );
 	virtual ~ConstantEvaluator( void );
-	virtual bool EvaluateResult( Number& result, Environment& environment ) override;
-	virtual bool StoreResult( const Number& result, Environment& environment ) override;
+	virtual bool EvaluateResult( Number& result, Environment& environment ) OVERRIDE;
+	virtual bool StoreResult( const Number& result, Environment& environment ) OVERRIDE;
 private:
 	Number* constant;
 };

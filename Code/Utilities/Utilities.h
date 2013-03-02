@@ -14,6 +14,14 @@
 #include <stdio.h>
 #include <string.h>
 
+#ifdef __LINUX__
+#	define sprintf_s		snprintf
+#	define vsprintf_s		vsnprintf
+#	define strcat_s( d, n, s )	strncat( d, s, (n) )
+#	define strcpy_s( d, n, s )	strncpy( d, s, (n) )
+#	define strncpy_s( d, n, s, x )	strncpy( d, s, ( (n) < (x) ? (n) : (x) ) )
+#endif //__LINUX__
+
 namespace Utilities
 {
 	class List;

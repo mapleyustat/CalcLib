@@ -21,21 +21,21 @@ public:
 	FloatingPointNumber( void );
 	virtual ~FloatingPointNumber( void );
 
-	virtual Number* CreateCopy( Environment& environment ) const override;
+	virtual Number* CreateCopy( Environment& environment ) const OVERRIDE;
 
-	virtual bool Print( char* buffer, int bufferSize, bool printLatex, Environment& environment ) const override;
-	virtual bool AssignFrom( const char* numberString, Environment& environment ) override;
-	virtual bool AssignFrom( const Number* number, Environment& environment ) override;
-	virtual bool AssignFrom( double number, Environment& environment ) override;
-	virtual bool AssignTo( double& number, Environment& environment )  const override;
-	virtual bool AssignSum( const Number* left, const Number* right, Environment& environment ) override;
-	virtual bool AssignDifference( const Number* left, const Number* right, Environment& environment ) override;
-	virtual bool AssignProduct( const Number* left, const Number* right, Environment& environment ) override;
-	virtual bool AssignQuotient( const Number* left, const Number* right, Environment& environment ) override;
-	virtual bool AssignAdditiveIdentity( Environment& environment ) override;
-	virtual bool AssignMultiplicativeIdentity( Environment& environment ) override;
-	virtual bool IsAdditiveIdentity( bool& isAdditiveIdentity, Environment& environment ) const override;
-	virtual bool IsMultiplicativeIdentity( bool& isMultiplicativeIdentity, Environment& environment ) const override;
+	virtual bool Print( char* buffer, int bufferSize, bool printLatex, Environment& environment ) const OVERRIDE;
+	virtual bool AssignFrom( const char* numberString, Environment& environment ) OVERRIDE;
+	virtual bool AssignFrom( const Number* number, Environment& environment ) OVERRIDE;
+	virtual bool AssignFrom( double number, Environment& environment ) OVERRIDE;
+	virtual bool AssignTo( double& number, Environment& environment )  const OVERRIDE;
+	virtual bool AssignSum( const Number* left, const Number* right, Environment& environment ) OVERRIDE;
+	virtual bool AssignDifference( const Number* left, const Number* right, Environment& environment ) OVERRIDE;
+	virtual bool AssignProduct( const Number* left, const Number* right, Environment& environment ) OVERRIDE;
+	virtual bool AssignQuotient( const Number* left, const Number* right, Environment& environment ) OVERRIDE;
+	virtual bool AssignAdditiveIdentity( Environment& environment ) OVERRIDE;
+	virtual bool AssignMultiplicativeIdentity( Environment& environment ) OVERRIDE;
+	virtual bool IsAdditiveIdentity( bool& isAdditiveIdentity, Environment& environment ) const OVERRIDE;
+	virtual bool IsMultiplicativeIdentity( bool& isMultiplicativeIdentity, Environment& environment ) const OVERRIDE;
 
 	// Let this be accessible.
 	double value;

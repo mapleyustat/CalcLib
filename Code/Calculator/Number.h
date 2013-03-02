@@ -28,7 +28,7 @@ class CalcLib::Number : public CalcLibClass
 {
 	DECLARE_CALCLIB_CLASS( Number );
 
-	friend FunctionArgumentEvaluator;
+	friend class FunctionArgumentEvaluator;
 
 public:
 

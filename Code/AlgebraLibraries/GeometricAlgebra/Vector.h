@@ -24,7 +24,7 @@ public:
 	virtual const char* LatexName( void ) const = 0;
 	virtual bool IsComposite( void ) const;
 
-	virtual Utilities::List::SortComparison SortCompare( const Item* compareWithItem ) const override;
+	virtual Utilities::List::SortComparison SortCompare( const Item* compareWithItem ) const OVERRIDE;
 };
 
 //=========================================================================================
@@ -35,11 +35,11 @@ public:
 	Vector_e0( void );
 	virtual ~Vector_e0( void );
 
-	virtual Item* MakeCopy( void ) const override;
-	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const override;
-	virtual double InnerProduct( const Vector& right ) const override;
-	virtual const char* Name( void ) const override;
-	virtual const char* LatexName( void ) const override;
+	virtual Item* MakeCopy( void ) const OVERRIDE;
+	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const OVERRIDE;
+	virtual double InnerProduct( const Vector& right ) const OVERRIDE;
+	virtual const char* Name( void ) const OVERRIDE;
+	virtual const char* LatexName( void ) const OVERRIDE;
 };
 
 //=========================================================================================
@@ -50,11 +50,11 @@ public:
 	Vector_e1( void );
 	virtual ~Vector_e1( void );
 
-	virtual Item* MakeCopy( void ) const override;
-	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const override;
-	virtual double InnerProduct( const Vector& right ) const override;
-	virtual const char* Name( void ) const override;
-	virtual const char* LatexName( void ) const override;
+	virtual Item* MakeCopy( void ) const OVERRIDE;
+	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const OVERRIDE;
+	virtual double InnerProduct( const Vector& right ) const OVERRIDE;
+	virtual const char* Name( void ) const OVERRIDE;
+	virtual const char* LatexName( void ) const OVERRIDE;
 };
 
 //=========================================================================================
@@ -65,11 +65,11 @@ public:
 	Vector_e2( void );
 	virtual ~Vector_e2( void );
 
-	virtual Item* MakeCopy( void ) const override;
-	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const override;
-	virtual double InnerProduct( const Vector& right ) const override;
-	virtual const char* Name( void ) const override;
-	virtual const char* LatexName( void ) const override;
+	virtual Item* MakeCopy( void ) const OVERRIDE;
+	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const OVERRIDE;
+	virtual double InnerProduct( const Vector& right ) const OVERRIDE;
+	virtual const char* Name( void ) const OVERRIDE;
+	virtual const char* LatexName( void ) const OVERRIDE;
 };
 
 //=========================================================================================
@@ -80,11 +80,11 @@ public:
 	Vector_e3( void );
 	virtual ~Vector_e3( void );
 
-	virtual Item* MakeCopy( void ) const override;
-	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const override;
-	virtual double InnerProduct( const Vector& right ) const override;
-	virtual const char* Name( void ) const override;
-	virtual const char* LatexName( void ) const override;
+	virtual Item* MakeCopy( void ) const OVERRIDE;
+	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const OVERRIDE;
+	virtual double InnerProduct( const Vector& right ) const OVERRIDE;
+	virtual const char* Name( void ) const OVERRIDE;
+	virtual const char* LatexName( void ) const OVERRIDE;
 };
 
 //=========================================================================================
@@ -95,11 +95,11 @@ public:
 	Vector_no( void );
 	virtual ~Vector_no( void );
 
-	virtual Item* MakeCopy( void ) const override;
-	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const override;
-	virtual double InnerProduct( const Vector& right ) const override;
-	virtual const char* Name( void ) const override;
-	virtual const char* LatexName( void ) const override;
+	virtual Item* MakeCopy( void ) const OVERRIDE;
+	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const OVERRIDE;
+	virtual double InnerProduct( const Vector& right ) const OVERRIDE;
+	virtual const char* Name( void ) const OVERRIDE;
+	virtual const char* LatexName( void ) const OVERRIDE;
 };
 
 //=========================================================================================
@@ -110,11 +110,11 @@ public:
 	Vector_ni( void );
 	virtual ~Vector_ni( void );
 
-	virtual Item* MakeCopy( void ) const override;
-	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const override;
-	virtual double InnerProduct( const Vector& right ) const override;
-	virtual const char* Name( void ) const override;
-	virtual const char* LatexName( void ) const override;
+	virtual Item* MakeCopy( void ) const OVERRIDE;
+	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const OVERRIDE;
+	virtual double InnerProduct( const Vector& right ) const OVERRIDE;
+	virtual const char* Name( void ) const OVERRIDE;
+	virtual const char* LatexName( void ) const OVERRIDE;
 };
 
 //=========================================================================================
@@ -125,11 +125,11 @@ public:
 	Vector_e0_bar( void );
 	virtual ~Vector_e0_bar( void );
 
-	virtual Item* MakeCopy( void ) const override;
-	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const override;
-	virtual double InnerProduct( const Vector& right ) const override;
-	virtual const char* Name( void ) const override;
-	virtual const char* LatexName( void ) const override;
+	virtual Item* MakeCopy( void ) const OVERRIDE;
+	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const OVERRIDE;
+	virtual double InnerProduct( const Vector& right ) const OVERRIDE;
+	virtual const char* Name( void ) const OVERRIDE;
+	virtual const char* LatexName( void ) const OVERRIDE;
 };
 
 //=========================================================================================
@@ -140,11 +140,11 @@ public:
 	Vector_e1_bar( void );
 	virtual ~Vector_e1_bar( void );
 
-	virtual Item* MakeCopy( void ) const override;
-	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const override;
-	virtual double InnerProduct( const Vector& right ) const override;
-	virtual const char* Name( void ) const override;
-	virtual const char* LatexName( void ) const override;
+	virtual Item* MakeCopy( void ) const OVERRIDE;
+	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const OVERRIDE;
+	virtual double InnerProduct( const Vector& right ) const OVERRIDE;
+	virtual const char* Name( void ) const OVERRIDE;
+	virtual const char* LatexName( void ) const OVERRIDE;
 };
 
 //=========================================================================================
@@ -155,11 +155,11 @@ public:
 	Vector_e2_bar( void );
 	virtual ~Vector_e2_bar( void );
 
-	virtual Item* MakeCopy( void ) const override;
-	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const override;
-	virtual double InnerProduct( const Vector& right ) const override;
-	virtual const char* Name( void ) const override;
-	virtual const char* LatexName( void ) const override;
+	virtual Item* MakeCopy( void ) const OVERRIDE;
+	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const OVERRIDE;
+	virtual double InnerProduct( const Vector& right ) const OVERRIDE;
+	virtual const char* Name( void ) const OVERRIDE;
+	virtual const char* LatexName( void ) const OVERRIDE;
 };
 
 //=========================================================================================
@@ -170,11 +170,11 @@ public:
 	Vector_e3_bar( void );
 	virtual ~Vector_e3_bar( void );
 
-	virtual Item* MakeCopy( void ) const override;
-	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const override;
-	virtual double InnerProduct( const Vector& right ) const override;
-	virtual const char* Name( void ) const override;
-	virtual const char* LatexName( void ) const override;
+	virtual Item* MakeCopy( void ) const OVERRIDE;
+	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const OVERRIDE;
+	virtual double InnerProduct( const Vector& right ) const OVERRIDE;
+	virtual const char* Name( void ) const OVERRIDE;
+	virtual const char* LatexName( void ) const OVERRIDE;
 };
 
 //=========================================================================================
@@ -185,11 +185,11 @@ public:
 	Vector_no_bar( void );
 	virtual ~Vector_no_bar( void );
 
-	virtual Item* MakeCopy( void ) const override;
-	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const override;
-	virtual double InnerProduct( const Vector& right ) const override;
-	virtual const char* Name( void ) const override;
-	virtual const char* LatexName( void ) const override;
+	virtual Item* MakeCopy( void ) const OVERRIDE;
+	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const OVERRIDE;
+	virtual double InnerProduct( const Vector& right ) const OVERRIDE;
+	virtual const char* Name( void ) const OVERRIDE;
+	virtual const char* LatexName( void ) const OVERRIDE;
 };
 
 //=========================================================================================
@@ -200,11 +200,11 @@ public:
 	Vector_ni_bar( void );
 	virtual ~Vector_ni_bar( void );
 
-	virtual Item* MakeCopy( void ) const override;
-	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const override;
-	virtual double InnerProduct( const Vector& right ) const override;
-	virtual const char* Name( void ) const override;
-	virtual const char* LatexName( void ) const override;
+	virtual Item* MakeCopy( void ) const OVERRIDE;
+	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const OVERRIDE;
+	virtual double InnerProduct( const Vector& right ) const OVERRIDE;
+	virtual const char* Name( void ) const OVERRIDE;
+	virtual const char* LatexName( void ) const OVERRIDE;
 };
 
 // Vector.h
