@@ -16,6 +16,10 @@
 #	define OVERRIDE	override
 #endif //GCC_VERSION
 
+#else //__LINUX__
+
+#define OVERRIDE override
+
 #endif //__LINUX__
 
 // CppLangFeatures.h
