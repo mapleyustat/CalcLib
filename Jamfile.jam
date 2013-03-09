@@ -1,5 +1,7 @@
 # Jamefile for CalcLib
 
+SubDir TOP ;
+
 GEOMETRIC_ALGEBRA_SRCS =
 	Code/AlgebraLibraries/GeometricAlgebra/Blade.cpp
 	Code/AlgebraLibraries/GeometricAlgebra/Blade.h
