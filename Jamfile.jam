@@ -175,19 +175,20 @@ SRCS =
 	Code/Override.h
 ;
 
-SourceGroup "Code\\AlgebraLibraries\\GeometricAlgebra" : $(GEOMETRIC_ALGEBRA_SRCS) ;
-SourceGroup "Code\\AlgebraLibraries\\LinearAlgebra" : $(LINEAR_ALGEBRA_SRCS) ;
-SourceGroup "Code\\AlgebraLibraries\\ScalarAlgebra" : $(SCALAR_ALGEBRA_SRCS) ;
-SourceGroup "Code\\Calculator" : $(CALCULATOR_LIBRARY_SRCS) ;
-SourceGroup "Code\\Calculator\\Environments\\ArbitraryPrecisionEnv" : $(ARBITRARY_PRECISION_ENV_SRCS) ;
-SourceGroup "Code\\Calculator\\Environments\\ComplexNumberFieldEnv" : $(COMPLEX_NUMBER_FIELD_ENV_SRCS) ;
-SourceGroup "Code\\Calculator\\Environments\\FloatingPointMathEnv" : $(FLOATING_POINT_MATH_ENV_SRCS) ;
-SourceGroup "Code\\Calculator\\Environments\\FractionEnv" : $(FRACTION_ENV_SRCS) ;
-SourceGroup "Code\\Calculator\\Environments\\GeometricalgebraEnv" : $(GEOMETRIC_ALGEBRA_ENV_SRCS) ;
-SourceGroup "Code\\Calculator\\Environments\\LinearAlgebraEnv" : $(LINAER_ALGEBRA_ENV_SRCS) ;
-
-C.OutputPath CalcLib : ./Build ;
+SourceGroup CalcLib : "Code\\AlgebraLibraries\\GeometricAlgebra" : $(GEOMETRIC_ALGEBRA_SRCS) ;
+SourceGroup CalcLib : "Code\\AlgebraLibraries\\LinearAlgebra" : $(LINEAR_ALGEBRA_SRCS) ;
+SourceGroup CalcLib : "Code\\AlgebraLibraries\\ScalarAlgebra" : $(SCALAR_ALGEBRA_SRCS) ;
+SourceGroup CalcLib : "Code\\Calculator" : $(CALCULATOR_LIBRARY_SRCS) ;
+SourceGroup CalcLib : "Code\\Calculator\\Environments\\ArbitraryPrecisionEnv" : $(ARBITRARY_PRECISION_ENV_SRCS) ;
+SourceGroup CalcLib : "Code\\Calculator\\Environments\\ComplexNumberFieldEnv" : $(COMPLEX_NUMBER_FIELD_ENV_SRCS) ;
+SourceGroup CalcLib : "Code\\Calculator\\Environments\\FloatingPointMathEnv" : $(FLOATING_POINT_MATH_ENV_SRCS) ;
+SourceGroup CalcLib : "Code\\Calculator\\Environments\\FractionEnv" : $(FRACTION_ENV_SRCS) ;
+SourceGroup CalcLib : "Code\\Calculator\\Environments\\GeometricalgebraEnv" : $(GEOMETRIC_ALGEBRA_ENV_SRCS) ;
+SourceGroup CalcLib : "Code\\Calculator\\Environments\\LinearAlgebraEnv" : $(LINAER_ALGEBRA_ENV_SRCS) ;
+SourceGroup CalcLib : "Code\\Utilities" : $(UTILITY_LIBRARY_SRCS) ;
 
 C.Library CalcLib : $(SRCS) ;
+
+Workspace CalcLib : CalcLib ;
 
 # Makefile for CalcLib

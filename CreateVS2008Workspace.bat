@@ -1,1 +1,1 @@
-@jam --workspace --gen=vs2008 Jamfile.jam ./ProjectFiles
+@jam --workspace --gen=vs2008 Jamfile.jam ./Build
