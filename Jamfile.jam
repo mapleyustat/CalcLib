@@ -1,8 +1,12 @@
 # Jamefile for CalcLib
 
-SubDir TOP ;
+SubDir CALCLIB ;
 
-GEOMETRIC_ALGEBRA_SRCS =
+# Josh says there's "a more Jam-like way of doing all this", but until I understand what that is, let's try this.
+
+{ # Enter scope so that we don't pollute some other Jamfile's name space.
+
+local GEOMETRIC_ALGEBRA_SRCS =
 	Code/AlgebraLibraries/GeometricAlgebra/Blade.cpp
 	Code/AlgebraLibraries/GeometricAlgebra/Blade.h
 	Code/AlgebraLibraries/GeometricAlgebra/CompositeVector.cpp
@@ -18,7 +22,7 @@ GEOMETRIC_ALGEBRA_SRCS =
 	Code/AlgebraLibraries/GeometricAlgebra/Vector.h
 ;
 
-LINEAR_ALGEBRA_SRCS =
+local LINEAR_ALGEBRA_SRCS =
 	Code/AlgebraLibraries/LinearAlgebra/Element.cpp
 	Code/AlgebraLibraries/LinearAlgebra/Element.h
 	Code/AlgebraLibraries/LinearAlgebra/LinearAlgebra.h
@@ -26,7 +30,7 @@ LINEAR_ALGEBRA_SRCS =
 	Code/AlgebraLibraries/LinearAlgebra/Matrix.h
 ;
 
-SCALAR_ALGEBRA_SRCS =
+local SCALAR_ALGEBRA_SRCS =
 	Code/AlgebraLibraries/ScalarAlgebra/Expression.cpp
 	Code/AlgebraLibraries/ScalarAlgebra/Expression.h
 	Code/AlgebraLibraries/ScalarAlgebra/RationalExpression.cpp
@@ -38,13 +42,13 @@ SCALAR_ALGEBRA_SRCS =
 	Code/AlgebraLibraries/ScalarAlgebra/VariableEvaluator.h
 ;
 
-ALGEBRA_LIBRARY_SRCS =
+local ALGEBRA_LIBRARY_SRCS =
 	$(GEOMETRIC_ALGEBRA_SRCS)
 	$(LINEAR_ALGEBRA_SRCS)
 	$(SCALAR_ALGEBRA_SRCS)
 ;
 
-ARBITRARY_PRECISION_ENV_SRCS =
+local ARBITRARY_PRECISION_ENV_SRCS =
 	Code/Calculator/Environments/ArbitraryPrecisionEnv/ArbitraryPrecisionEnv.cpp
 	Code/Calculator/Environments/ArbitraryPrecisionEnv/ArbitraryPrecisionEnv.h
 	Code/Calculator/Environments/ArbitraryPrecisionEnv/ArbitraryPrecisionEnvClasses.h
@@ -58,7 +62,7 @@ ARBITRARY_PRECISION_ENV_SRCS =
 	Code/Calculator/Environments/ArbitraryPrecisionEnv/RoundFunc.h
 ;
 
-COMPLEX_NUMBER_FIELD_ENV_SRCS =
+local COMPLEX_NUMBER_FIELD_ENV_SRCS =
 	Code/Calculator/Environments/ComplexNumberFieldEnv/ComplexNumber.cpp
 	Code/Calculator/Environments/ComplexNumberFieldEnv/ComplexNumber.h
 	Code/Calculator/Environments/ComplexNumberFieldEnv/ComplexNumberFieldEnv.cpp
@@ -66,7 +70,7 @@ COMPLEX_NUMBER_FIELD_ENV_SRCS =
 	Code/Calculator/Environments/ComplexNumberFieldEnv/ComplexNumberfieldEnvClasses.h
 ;
 
-FLOATING_POINT_MATH_ENV_SRCS =
+local FLOATING_POINT_MATH_ENV_SRCS =
 	Code/Calculator/Environments/FloatingPointMathEnv/FloatingPointMathEnv.cpp
 	Code/Calculator/Environments/FloatingPointMathEnv/FloatingPiontMathEnv.h
 	Code/Calculator/Environments/FloatingPointMathEnv/FloatingPointMathEnvClasses.h
@@ -76,7 +80,7 @@ FLOATING_POINT_MATH_ENV_SRCS =
 	Code/Calculator/Environments/FloatingPointMathEnv/FloatNumber.h
 ;
 
-FRACTION_ENV_SRCS =
+local FRACTION_ENV_SRCS =
 	Code/Calculator/Environments/FractionEnv/FractionEnv.cpp
 	Code/Calculator/Environments/FractionEnv/FractionEnv.h
 	Code/Calculator/Environments/FractionEnv/FractionEnvClasses.h
@@ -84,7 +88,7 @@ FRACTION_ENV_SRCS =
 	Code/Calculator/Environments/FractionEnv/FractionNumber.h
 ;
 
-GEOMETRIC_ALGEBRA_ENV_SRCS =
+local GEOMETRIC_ALGEBRA_ENV_SRCS =
 	Code/Calculator/Environments/GeometricAlgebraEnv/BarFunc.cpp
 	Code/Calculator/Environments/GeometricAlgebraEnv/BarFunc.h
 	Code/Calculator/Environments/GeometricAlgebraEnv/GeometricAlgebraEnv.cpp
@@ -104,7 +108,7 @@ GEOMETRIC_ALGEBRA_ENV_SRCS =
 	Code/Calculator/Environments/GeometricAlgebraEnv/ScalarPartFunc.h
 ;
 
-LINAER_ALGEBRA_ENV_SRCS =
+local LINAER_ALGEBRA_ENV_SRCS =
 	Code/Calculator/Environments/LinearAlgebraEnv/LinearAlgebraEnv.cpp
 	Code/Calculator/Environments/LinearAlgebraEnv/LinearAlegbraEnv.h
 	Code/Calculator/Environments/LinearAlgebraEnv/LinearAlgebraEnvClasses.h
@@ -114,7 +118,7 @@ LINAER_ALGEBRA_ENV_SRCS =
 	Code/Calculator/Environments/LinearAlgebraEnv/MatrixNumber.h
 ;
 
-CALCULATOR_LIBRARY_ENV_SRCS =
+local CALCULATOR_LIBRARY_ENV_SRCS =
 	$(ARBITRARY_PRECISION_ENV_SRCS)
 	$(COMPLEX_NUMBER_FIELD_ENV_SRCS)
 	$(FLOATING_POINT_MATH_ENV_SRCS)
@@ -123,7 +127,7 @@ CALCULATOR_LIBRARY_ENV_SRCS =
 	$(LINAER_ALGEBRA_ENV_SRCS)
 ;
 
-CALCULATOR_LIBRARY_SRCS =
+local CALCULATOR_LIBRARY_SRCS =
 	Code/Calculator/CalcLib.h
 	Code/Calculator/Calculator.cpp
 	Code/Calculator/Calculator.h
@@ -155,7 +159,7 @@ CALCULATOR_LIBRARY_SRCS =
 	Code/Calculator/Variable.h
 ;
 
-UTILITY_LIBRARY_SRCS =
+local UTILITY_LIBRARY_SRCS =
 	Code/Utilities/List.cpp
 	Code/Utilities/List.h
 	Code/Utilities/Map.h
@@ -167,7 +171,7 @@ UTILITY_LIBRARY_SRCS =
 	Code/Utilities/Utilities.h
 ;
 
-SRCS =
+local SRCS =
 	$(ALGEBRA_LIBRARY_SRCS)
 	$(CALCULATOR_LIBRARY_SRCS)
 	$(CALCULATOR_LIBRARY_ENV_SRCS)
@@ -190,5 +194,7 @@ SourceGroup CalcLib : "Code\\Utilities" : $(UTILITY_LIBRARY_SRCS) ;
 C.Library CalcLib : $(SRCS) ;
 
 Workspace CalcLib : CalcLib ;
+
+} # End scope.
 
 # Makefile for CalcLib
