@@ -1,6 +1,6 @@
 # Jamefile for CalcLib
 
-SubDir SPENCERS_PROJECTS ;
+SubDir SPENCERS_PROJECTS CalcLib ;
 
 GEOMETRIC_ALGEBRA_SRCS =
 	Code/AlgebraLibraries/GeometricAlgebra/Blade.cpp
@@ -187,6 +187,8 @@ SourceGroup CalcLib : "Code\\Calculator\\Environments\\GeometricalgebraEnv" : $(
 SourceGroup CalcLib : "Code\\Calculator\\Environments\\LinearAlgebraEnv" : $(LINAER_ALGEBRA_ENV_SRCS) ;
 SourceGroup CalcLib : "Code\\Utilities" : $(UTILITY_LIBRARY_SRCS) ;
 
+C.IntermediatesPathRoot CalcLib : ../Build ;
+C.OutputPath CalcLib : Build ;
 C.Library CalcLib : $(SRCS) ;
 
 Workspace CalcLib : CalcLib ;
