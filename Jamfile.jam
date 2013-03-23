@@ -187,7 +187,6 @@ SourceGroup CalcLib : "Code\\Calculator\\Environments\\GeometricalgebraEnv" : $(
 SourceGroup CalcLib : "Code\\Calculator\\Environments\\LinearAlgebraEnv" : $(LINAER_ALGEBRA_ENV_SRCS) ;
 SourceGroup CalcLib : "Code\\Utilities" : $(UTILITY_LIBRARY_SRCS) ;
 
-C.IntermediatesPathRoot CalcLib : ../Build ;
 C.OutputPath CalcLib : Build ;
 C.Library CalcLib : $(SRCS) ;
 
