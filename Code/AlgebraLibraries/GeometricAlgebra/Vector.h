@@ -88,6 +88,51 @@ public:
 };
 
 //=========================================================================================
+class GeometricAlgebra::Vector_e4 : public Vector
+{
+public:
+
+	Vector_e4( void );
+	virtual ~Vector_e4( void );
+
+	virtual Item* MakeCopy( void ) const OVERRIDE;
+	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const OVERRIDE;
+	virtual double InnerProduct( const Vector& right ) const OVERRIDE;
+	virtual const char* Name( void ) const OVERRIDE;
+	virtual const char* LatexName( void ) const OVERRIDE;
+};
+
+//=========================================================================================
+class GeometricAlgebra::Vector_e5 : public Vector
+{
+public:
+
+	Vector_e5( void );
+	virtual ~Vector_e5( void );
+
+	virtual Item* MakeCopy( void ) const OVERRIDE;
+	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const OVERRIDE;
+	virtual double InnerProduct( const Vector& right ) const OVERRIDE;
+	virtual const char* Name( void ) const OVERRIDE;
+	virtual const char* LatexName( void ) const OVERRIDE;
+};
+
+//=========================================================================================
+class GeometricAlgebra::Vector_e6 : public Vector
+{
+public:
+
+	Vector_e6( void );
+	virtual ~Vector_e6( void );
+
+	virtual Item* MakeCopy( void ) const OVERRIDE;
+	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const OVERRIDE;
+	virtual double InnerProduct( const Vector& right ) const OVERRIDE;
+	virtual const char* Name( void ) const OVERRIDE;
+	virtual const char* LatexName( void ) const OVERRIDE;
+};
+
+//=========================================================================================
 class GeometricAlgebra::Vector_no : public Vector
 {
 public:
