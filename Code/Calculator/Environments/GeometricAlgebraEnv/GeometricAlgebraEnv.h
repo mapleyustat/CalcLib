@@ -19,12 +19,12 @@ public:
 	GeometricAlgebraEnvironment( void );
 	virtual ~GeometricAlgebraEnvironment( void );
 	
-	virtual void PrintEnvironmentInfo( void ) OVERRIDE;
-	virtual Number* CreateNumber( void ) OVERRIDE;
-	virtual FunctionEvaluator* CreateFunction( const char* functionName ) OVERRIDE;
-	virtual Evaluator* CreateVariable( const char* variableName ) OVERRIDE;
-	virtual Evaluator* CreateBinaryOperator( const char* operatorName, Evaluator* leftOperand, Evaluator* rightOperand, bool& isBinaryOperationEvaluator ) OVERRIDE;
-	virtual Evaluator* CreateUnaryOperator( const char* operatorName, Evaluator* operand, bool& isUnaryOperationEvaluator ) OVERRIDE;
+	virtual void PrintEnvironmentInfo( void ) override;
+	virtual Number* CreateNumber( void ) override;
+	virtual FunctionEvaluator* CreateFunction( const char* functionName ) override;
+	virtual Evaluator* CreateVariable( const char* variableName ) override;
+	virtual Evaluator* CreateBinaryOperator( const char* operatorName, Evaluator* leftOperand, Evaluator* rightOperand, bool& isBinaryOperationEvaluator ) override;
+	virtual Evaluator* CreateUnaryOperator( const char* operatorName, Evaluator* operand, bool& isUnaryOperationEvaluator ) override;
 
 	enum DisplayMode
 	{

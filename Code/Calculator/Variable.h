@@ -18,9 +18,9 @@ class CalcLib::VariableEvaluator : public Evaluator
 public:
 	VariableEvaluator( const char* variableName );
 	virtual ~VariableEvaluator( void );
-	virtual bool EvaluateResult( Number& result, Environment& environment ) OVERRIDE;
-	virtual bool StoreResult( const Number& result, Environment& environment ) OVERRIDE;
-	virtual Number* CreateNumberForResult( Environment& environment ) OVERRIDE;
+	virtual bool EvaluateResult( Number& result, Environment& environment ) override;
+	virtual bool StoreResult( const Number& result, Environment& environment ) override;
+	virtual Number* CreateNumberForResult( Environment& environment ) override;
 	const char* Name( void ) const;
 private:
 	char* variableName;

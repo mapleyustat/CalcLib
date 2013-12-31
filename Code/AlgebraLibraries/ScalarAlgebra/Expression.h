@@ -34,8 +34,8 @@ public:
 
 		bool Print( char* printBuffer, int printBufferSize, PrintPurpose printPurpose ) const;
 
-		virtual Utilities::List::Item* MakeCopy( void ) const OVERRIDE;
-		virtual Utilities::List::SortComparison SortCompare( const Utilities::List::Item* item ) const OVERRIDE;
+		virtual Utilities::List::Item* MakeCopy( void ) const override;
+		virtual Utilities::List::SortComparison SortCompare( const Utilities::List::Item* item ) const override;
 
 		char* name;
 		int exponent;
@@ -62,8 +62,8 @@ public:
 		const Variable* FindLikeVariable( const Variable* givenVariable ) const;
 		bool Evaluate( Term& result, const VariableEvaluator& variableEvaluator ) const;
 
-		virtual Utilities::List::Item* MakeCopy( void ) const OVERRIDE;
-		virtual Utilities::List::SortComparison SortCompare( const Utilities::List::Item* item ) const OVERRIDE;
+		virtual Utilities::List::Item* MakeCopy( void ) const override;
+		virtual Utilities::List::SortComparison SortCompare( const Utilities::List::Item* item ) const override;
 
 		double coeficient;
 		Utilities::List productOfVariables;

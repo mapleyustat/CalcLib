@@ -19,10 +19,10 @@ public:
 	ComplexNumberFieldEnvironment( void );
 	virtual ~ComplexNumberFieldEnvironment( void );
 
-	virtual void PrintEnvironmentInfo( void ) OVERRIDE;
-	virtual Number* CreateNumber( void ) OVERRIDE;
-	virtual FunctionEvaluator* CreateFunction( const char* functionName ) OVERRIDE;
-	virtual Evaluator* CreateVariable( const char* variableName ) OVERRIDE;
+	virtual void PrintEnvironmentInfo( void ) override;
+	virtual Number* CreateNumber( void ) override;
+	virtual FunctionEvaluator* CreateFunction( const char* functionName ) override;
+	virtual Evaluator* CreateVariable( const char* variableName ) override;
 };
 
 // ComplexNumberFieldEnv.h

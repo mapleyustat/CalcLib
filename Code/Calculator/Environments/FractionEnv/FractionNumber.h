@@ -19,26 +19,26 @@ public:
 	FractionNumber( void );
 	virtual ~FractionNumber( void );
 
-	virtual Number* CreateCopy( Environment& environment ) const OVERRIDE;
+	virtual Number* CreateCopy( Environment& environment ) const override;
 
-	virtual bool Print( char* buffer, int bufferSize, bool printLatex, Environment& environment ) const OVERRIDE;
-	virtual bool AssignFrom( const char* numberString, Environment& environment ) OVERRIDE;
-	virtual bool AssignFrom( const Number* number, Environment& environment ) OVERRIDE;
-	virtual bool AssignFrom( double number, Environment& environment ) OVERRIDE;
-	virtual bool AssignTo( double& number, Environment& environment )  const OVERRIDE;
-	virtual bool AssignSum( const Number* left, const Number* right, Environment& environment ) OVERRIDE;
-	virtual bool AssignDifference( const Number* left, const Number* right, Environment& environment ) OVERRIDE;
-	virtual bool AssignProduct( const Number* left, const Number* right, Environment& environment ) OVERRIDE;
-	virtual bool AssignQuotient( const Number* left, const Number* right, Environment& environment ) OVERRIDE;
-	virtual bool AssignAdditiveInverse( const Number* number, Environment& environment ) OVERRIDE;
-	virtual bool AssignMultilicativeInverse( const Number* number, Environment& environment ) OVERRIDE;
-	virtual bool AssignAdditiveIdentity( Environment& environment ) OVERRIDE;
-	virtual bool AssignMultiplicativeIdentity( Environment& environment ) OVERRIDE;
-	virtual bool AssignInnerProduct( const Number* left, const Number* right, Environment& environment ) OVERRIDE;
-	virtual bool AssignOuterProduct( const Number* left, const Number* right, Environment& environment ) OVERRIDE;
-	virtual bool IsAdditiveIdentity( bool& isAdditiveIdentity, Environment& environment ) const OVERRIDE;
-	virtual bool IsMultiplicativeIdentity( bool& isMultiplicativeIdentity, Environment& environment ) const OVERRIDE;
-	virtual bool CompareWith( const Number* number, Comparison& comparison, Environment& environment ) const OVERRIDE;
+	virtual bool Print( char* buffer, int bufferSize, bool printLatex, Environment& environment ) const override;
+	virtual bool AssignFrom( const char* numberString, Environment& environment ) override;
+	virtual bool AssignFrom( const Number* number, Environment& environment ) override;
+	virtual bool AssignFrom( double number, Environment& environment ) override;
+	virtual bool AssignTo( double& number, Environment& environment )  const override;
+	virtual bool AssignSum( const Number* left, const Number* right, Environment& environment ) override;
+	virtual bool AssignDifference( const Number* left, const Number* right, Environment& environment ) override;
+	virtual bool AssignProduct( const Number* left, const Number* right, Environment& environment ) override;
+	virtual bool AssignQuotient( const Number* left, const Number* right, Environment& environment ) override;
+	virtual bool AssignAdditiveInverse( const Number* number, Environment& environment ) override;
+	virtual bool AssignMultilicativeInverse( const Number* number, Environment& environment ) override;
+	virtual bool AssignAdditiveIdentity( Environment& environment ) override;
+	virtual bool AssignMultiplicativeIdentity( Environment& environment ) override;
+	virtual bool AssignInnerProduct( const Number* left, const Number* right, Environment& environment ) override;
+	virtual bool AssignOuterProduct( const Number* left, const Number* right, Environment& environment ) override;
+	virtual bool IsAdditiveIdentity( bool& isAdditiveIdentity, Environment& environment ) const override;
+	virtual bool IsMultiplicativeIdentity( bool& isMultiplicativeIdentity, Environment& environment ) const override;
+	virtual bool CompareWith( const Number* number, Comparison& comparison, Environment& environment ) const override;
 
 private:
 

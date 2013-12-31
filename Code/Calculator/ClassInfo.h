@@ -73,7 +73,7 @@ inline const ClassType* CalcLib::CalcLibClass::Cast( void ) const
 //=========================================================================================
 #define DECLARE_CALCLIB_CLASS( className ) \
 	protected: \
-	virtual const char* VirtualClassName( void ) const OVERRIDE \
+	virtual const char* VirtualClassName( void ) const override \
 	{ \
 		return #className; \
 	} \

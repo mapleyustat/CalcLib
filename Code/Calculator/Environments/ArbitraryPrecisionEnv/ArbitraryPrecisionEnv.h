@@ -19,8 +19,8 @@ public:
 	ArbitraryPrecisionEnvironment( void );
 	virtual ~ArbitraryPrecisionEnvironment( void );
 
-	virtual void PrintEnvironmentInfo( void ) OVERRIDE;
-	virtual Number* CreateNumber( void ) OVERRIDE;
+	virtual void PrintEnvironmentInfo( void ) override;
+	virtual Number* CreateNumber( void ) override;
 	virtual FunctionEvaluator* CreateFunction( const char* functionName );
 	virtual Evaluator* CreateVariable( const char* variableName );
 
