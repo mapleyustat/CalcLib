@@ -353,6 +353,135 @@ Vector_e6::Vector_e6( void )
 }
 
 //=========================================================================================
+Vector_e7::Vector_e7( void )
+{
+}
+
+//=========================================================================================
+/*virtual*/ Vector_e7::~Vector_e7( void )
+{
+}
+
+//=========================================================================================
+/*virtual*/ Utilities::List::Item* Vector_e7::MakeCopy( void ) const
+{
+	return new Vector_e7();
+}
+
+//=========================================================================================
+/*virtual*/ Vector* Vector_e7::MakeBar( ScalarAlgebra::Scalar& sign ) const
+{
+	return 0;
+}
+
+//=========================================================================================
+/*virtual*/ double Vector_e7::InnerProduct( const Vector& right ) const
+{
+	const char* rightName = right.Name();
+	if( 0 == strcmp( rightName, "e7" ) )
+		return 1.0;
+	return 0.0;
+}
+
+//=========================================================================================
+/*virtual*/ const char* Vector_e7::Name( void ) const
+{
+	return "e7";
+}
+
+//=========================================================================================
+/*virtual*/ const char* Vector_e7::LatexName( void ) const
+{
+	return "e_7";
+}
+
+//=========================================================================================
+Vector_e8::Vector_e8( void )
+{
+}
+
+//=========================================================================================
+/*virtual*/ Vector_e8::~Vector_e8( void )
+{
+}
+
+//=========================================================================================
+/*virtual*/ Utilities::List::Item* Vector_e8::MakeCopy( void ) const
+{
+	return new Vector_e8();
+}
+
+//=========================================================================================
+/*virtual*/ Vector* Vector_e8::MakeBar( ScalarAlgebra::Scalar& sign ) const
+{
+	return 0;
+}
+
+//=========================================================================================
+/*virtual*/ double Vector_e8::InnerProduct( const Vector& right ) const
+{
+	const char* rightName = right.Name();
+	if( 0 == strcmp( rightName, "e8" ) )
+		return 1.0;
+	return 0.0;
+}
+
+//=========================================================================================
+/*virtual*/ const char* Vector_e8::Name( void ) const
+{
+	return "e8";
+}
+
+//=========================================================================================
+/*virtual*/ const char* Vector_e8::LatexName( void ) const
+{
+	return "e_8";
+}
+
+//=========================================================================================
+Vector_e9::Vector_e9( void )
+{
+}
+
+//=========================================================================================
+/*virtual*/ Vector_e9::~Vector_e9( void )
+{
+}
+
+//=========================================================================================
+/*virtual*/ Utilities::List::Item* Vector_e9::MakeCopy( void ) const
+{
+	return new Vector_e9();
+}
+
+//=========================================================================================
+/*virtual*/ Vector* Vector_e9::MakeBar( ScalarAlgebra::Scalar& sign ) const
+{
+	return 0;
+}
+
+//=========================================================================================
+/*virtual*/ double Vector_e9::InnerProduct( const Vector& right ) const
+{
+	const char* rightName = right.Name();
+	if( 0 == strcmp( rightName, "e9" ) )
+		return 1.0;
+	return 0.0;
+}
+
+//=========================================================================================
+/*virtual*/ const char* Vector_e9::Name( void ) const
+{
+	return "e9";
+}
+
+//=========================================================================================
+/*virtual*/ const char* Vector_e9::LatexName( void ) const
+{
+	return "e_9";
+}
+
+//=========================================================================================
 Vector_no::Vector_no( void )
 {
 }

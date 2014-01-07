@@ -133,6 +133,51 @@ public:
 };
 
 //=========================================================================================
+class GeometricAlgebra::Vector_e7 : public Vector
+{
+public:
+
+	Vector_e7( void );
+	virtual ~Vector_e7( void );
+
+	virtual Item* MakeCopy( void ) const override;
+	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const override;
+	virtual double InnerProduct( const Vector& right ) const override;
+	virtual const char* Name( void ) const override;
+	virtual const char* LatexName( void ) const override;
+};
+
+//=========================================================================================
+class GeometricAlgebra::Vector_e8 : public Vector
+{
+public:
+
+	Vector_e8( void );
+	virtual ~Vector_e8( void );
+
+	virtual Item* MakeCopy( void ) const override;
+	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const override;
+	virtual double InnerProduct( const Vector& right ) const override;
+	virtual const char* Name( void ) const override;
+	virtual const char* LatexName( void ) const override;
+};
+
+//=========================================================================================
+class GeometricAlgebra::Vector_e9 : public Vector
+{
+public:
+
+	Vector_e9( void );
+	virtual ~Vector_e9( void );
+
+	virtual Item* MakeCopy( void ) const override;
+	virtual Vector* MakeBar( ScalarAlgebra::Scalar& sign ) const override;
+	virtual double InnerProduct( const Vector& right ) const override;
+	virtual const char* Name( void ) const override;
+	virtual const char* LatexName( void ) const override;
+};
+
+//=========================================================================================
 class GeometricAlgebra::Vector_no : public Vector
 {
 public:

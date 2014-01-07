@@ -111,6 +111,12 @@ GeometricAlgebraEnvironment::GeometricAlgebraEnvironment( void )
 		vector = new GeometricAlgebra::Vector_e5();
 	else if( 0 == strcmp( variableName, "e6" ) )
 		vector = new GeometricAlgebra::Vector_e6();
+	else if( 0 == strcmp( variableName, "e7" ) )
+		vector = new GeometricAlgebra::Vector_e7();
+	else if( 0 == strcmp( variableName, "e8" ) )
+		vector = new GeometricAlgebra::Vector_e8();
+	else if( 0 == strcmp( variableName, "e9" ) )
+		vector = new GeometricAlgebra::Vector_e9();
 	else if( 0 == strcmp( variableName, "e0b" ) )
 		vector = new GeometricAlgebra::Vector_e0_bar();
 	else if( 0 == strcmp( variableName, "e1b" ) )
