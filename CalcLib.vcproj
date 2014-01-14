@@ -632,6 +632,14 @@
 				Name="Utilities"
 				>
 				<File
+					RelativePath=".\Code\Utilities\Array.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Code\Utilities\Array.hpp"
+					>
+				</File>
+				<File
 					RelativePath=".\Code\Utilities\List.cpp"
 					>
 				</File>

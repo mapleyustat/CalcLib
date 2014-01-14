@@ -24,12 +24,14 @@
 
 namespace Utilities
 {
+	template< typename Type > class Array;
 	class List;
 	class MultiList;
 	template< typename EntryType > class Map;
 	template< typename Type > class ScopeDelete;
 }
 
+#include "Array.h"
 #include "List.h"
 #include "MultiList.h"
 #include "Map.h"
