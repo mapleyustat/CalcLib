@@ -7,6 +7,7 @@ Utilities::Array< Type >::Array( int growSize /*= 256*/ )
 	size = 0;
 	count = 0;
 	this->growSize = growSize;
+	array = 0;
 }
 
 //=========================================================================================
@@ -20,10 +21,7 @@ Utilities::Array< Type >::~Array( void )
 template< typename Type >
 void Utilities::Array< Type >::Append( const Type& type )
 {
-	int index = count - 1;
-	if( index < 0 )
-		index = 0;
-	( *this )[ index ] = type;
+	( *this )[ count ] = type;
 }
 
 //=========================================================================================
@@ -51,9 +49,9 @@ Type& Utilities::Array< Type >::operator[]( int index )
 	{
 		size = ( ( index / growSize ) + 1 ) * growSize;
 		if( !array )
-			array = ( Type* )malloc( size );
+			array = ( Type* )malloc( size * sizeof( Type ) );
 		else
-			array = ( Type* )realloc( array, size );		// Beware: Letting array memory move around can lead to hard-to-find bugs!
+			array = ( Type* )realloc( array, size * sizeof( Type ) );		// Beware: Letting array memory move around can lead to hard-to-find bugs!
 	}
 
 	if( index >= count )
