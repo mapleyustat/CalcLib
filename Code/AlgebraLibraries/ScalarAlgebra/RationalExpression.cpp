@@ -276,6 +276,8 @@ bool RationalExpression::Recipricate( void )
 // members as mutable.
 bool RationalExpression::Simplify( void )
 {
+	return true;
+
 	// If the denominator is a monomial, we can always reduce the denominator to one.
 	if( denominator.IsMonomial() )
 	{
