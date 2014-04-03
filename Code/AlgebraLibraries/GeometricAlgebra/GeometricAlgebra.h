@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #include "../../Utilities/Utilities.h"
 #include "../ScalarAlgebra/ScalarAlgebra.h"
@@ -50,6 +51,7 @@ namespace GeometricAlgebra
 	class Vector_ni_bar;
 
 	class CompositeVector;
+	class MotherVector;
 }
 
 //=========================================================================================
@@ -59,5 +61,6 @@ namespace GeometricAlgebra
 #include "SumOfBlades.h"
 #include "SumOfPseudoVersors.h"
 #include "CompositeVector.h"
+#include "MotherVector.h"
 
 // GeometricAlgebra.h

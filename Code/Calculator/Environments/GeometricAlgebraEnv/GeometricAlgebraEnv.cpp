@@ -117,6 +117,8 @@ GeometricAlgebraEnvironment::GeometricAlgebraEnvironment( void )
 		vector = new GeometricAlgebra::Vector_e8();
 	else if( 0 == strcmp( variableName, "e9" ) )
 		vector = new GeometricAlgebra::Vector_e9();
+	else if( GeometricAlgebra::MotherVector::IsMotherVector( variableName ) )
+		vector = new GeometricAlgebra::MotherVector( variableName );
 	else if( 0 == strcmp( variableName, "e0b" ) )
 		vector = new GeometricAlgebra::Vector_e0_bar();
 	else if( 0 == strcmp( variableName, "e1b" ) )

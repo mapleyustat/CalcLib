@@ -175,6 +175,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Code\AlgebraLibraries\GeometricAlgebra\MotherVector.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Code\AlgebraLibraries\GeometricAlgebra\MotherVector.h"
+						>
+					</File>
+					<File
 						RelativePath=".\Code\AlgebraLibraries\GeometricAlgebra\PseudoVersor.cpp"
 						>
 					</File>
